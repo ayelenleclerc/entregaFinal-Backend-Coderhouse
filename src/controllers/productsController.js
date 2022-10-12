@@ -14,16 +14,16 @@ const getAllProducts = (req, res) => {
 
 const getProductById = (req, res) => {
   const {
-    params: { productId },
+    params: { id },
   } = req;
-  if (!productId) {
+  if (!id) {
     res.status(400).send({
       status: "FAILED",
-      data: { error: "El parámetro ':productId' no puede estar vacio" },
+      data: { error: "El parámetro ':id' no puede estar vacio" },
     });
   }
   try {
-    const product = productService.getProductById(productId);
+    const product = productService.getProductById(id);
     res.send({ status: "OK", data: product });
   } catch (error) {
     res
@@ -68,17 +68,17 @@ const createNewProduct = (req, res) => {
 const updateProduct = (req, res) => {
   const {
     body,
-    params: { productId },
+    params: { id },
   } = req;
 
-  if (!productId) {
+  if (!id) {
     req.status(400).send({
       status: "FAILED",
-      data: { error: "El parámetro ':productId' no puede estar vacio" },
+      data: { error: "El parámetro ':id' no puede estar vacio" },
     });
   }
   try {
-    const updateProduct = productService.updateProduct(productId, body);
+    const updateProduct = productService.updateProduct(id, body);
     res.send({ status: "ok", data: updateProduct });
   } catch (error) {
     res
@@ -89,18 +89,18 @@ const updateProduct = (req, res) => {
 
 const deleteProduct = (req, res) => {
   const {
-    params: { productId },
+    params: { id },
   } = req;
 
-  if (!productId) {
+  if (!id) {
     req.status(400).send({
       status: "FAILED",
-      data: { error: "El parámetro ':productId' no puede estar vacio" },
+      data: { error: "El parámetro ':id' no puede estar vacio" },
     });
   }
 
   try {
-    productService.deleteProduct(productId);
+    productService.deleteProduct(id);
     res.status(204).send({ statis: "ok" });
   } catch (error) {
     res

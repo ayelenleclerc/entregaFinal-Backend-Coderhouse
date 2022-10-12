@@ -4,12 +4,14 @@ const carritoController = require("../../controllers/carritoController.js");
 
 router.get("/", carritoController.getAllCarrito);
 
-router.get("/:carritoId", carritoController.getCarritoById);
+router.get("/:id/productos", carritoController.getCarritoById);
 
-router.put("/:carritoId", carritoController.updateCarrito);
+router.put("/:id", carritoController.updateCarrito);
 
 router.post("/", carritoController.createNewCarrito);
+router.post("/:id/productos", carritoController.createOneProduct);
 
-router.delete("/:carritoId", carritoController.deleteCarrito);
+router.delete("/:id", carritoController.deleteCarrito);
+router.delete("/:id/productos/:id_prod", carritoController.deleteProduct);
 
 module.exports = router;

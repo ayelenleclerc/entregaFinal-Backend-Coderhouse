@@ -14,16 +14,16 @@ const getAllCarrito = (req, res) => {
 
 const getCarritoById = (req, res) => {
   const {
-    params: { carritoId },
+    params: { id },
   } = req;
-  if (!carritoId) {
+  if (!id) {
     res.status(400).send({
       status: "FAILED",
-      data: { error: "El parámetro ':carritoId' no puede estar vacio" },
+      data: { error: "El parámetro ':id' no puede estar vacio" },
     });
   }
   try {
-    const carrito = carritoService.getCarritoById(carritoId);
+    const carrito = carritoService.getCarritoById(id);
     res.send({ status: "OK", data: carrito });
   } catch (error) {
     res
@@ -33,23 +33,18 @@ const getCarritoById = (req, res) => {
 };
 
 const createNewCarrito = (req, res) => {
-  const { body } = req;
-  if (!body.user) {
-    return;
+  const { productos } = req.body;
+  if (!productos) {
+    res.status(401).json({
+      status: "False",
+      result: "Producto no cumple con el formato requerido!",
+    });
   }
 
   const newCarrito = {
     id: uuid(),
     timestamp: Date.now(),
-    user: body.user,
-    products: {
-      name: body.name,
-      description: body.description,
-      code: body.code,
-      img: body.img,
-      price: body.price,
-      stock: body.stock,
-    },
+    productos,
   };
   try {
     const createdCarrito = carritoService.createNewCarrito(newCarrito);
@@ -64,17 +59,17 @@ const createNewCarrito = (req, res) => {
 const updateCarrito = (req, res) => {
   const {
     body,
-    params: { carritoId },
+    params: { id },
   } = req;
 
-  if (!carritoId) {
+  if (!id) {
     req.status(400).send({
       status: "FAILED",
-      data: { error: "El parámetro ':carritoId' no puede estar vacio" },
+      data: { error: "El parámetro ':id' no puede estar vacio" },
     });
   }
   try {
-    const updateCarrito = carritoService.updateCarrito(carritoId, body);
+    const updateCarrito = carritoService.updateCarrito(id, body);
     res.send({ status: "ok", data: updateCarrito });
   } catch (error) {
     res
@@ -85,18 +80,18 @@ const updateCarrito = (req, res) => {
 
 const deleteCarrito = (req, res) => {
   const {
-    params: { carritoId },
+    params: { id },
   } = req;
 
-  if (!carritoId) {
+  if (!id) {
     req.status(400).send({
       status: "FAILED",
-      data: { error: "El parámetro ':carritoId' no puede estar vacio" },
+      data: { error: "El parámetro ':id' no puede estar vacio" },
     });
   }
 
   try {
-    carritoService.deleteCarrito(carritoId);
+    carritoService.deleteCarrito(id);
     res.status(204).send({ statis: "ok" });
   } catch (error) {
     res
@@ -105,10 +100,47 @@ const deleteCarrito = (req, res) => {
   }
 };
 
+const createOneProduct = (req, res) => {
+  const { id } = req.params;
+  const { name, description, img, price, stock } = req.body;
+
+  if (!name || !description || !img || !price || (!stock && !id)) {
+    res
+      .status(204)
+      .json({ status: "False", result: "Formato ingresado incompleto." });
+    return;
+  }
+  const newProduct = {
+    timestamp: new Date().toUTCString(),
+    name,
+    description,
+    code,
+    img,
+    price,
+    stock,
+  };
+
+  const product = carritoService.createProduct(id, newProduct);
+  res.status(201).json({ status: "OK", data: product });
+};
+
+const deleteProduct = (req, res) => {
+  const { id, id_prod } = req.params;
+
+  if (!id || !id_prod) {
+    return;
+  }
+
+  const deleteOneProduct = carritoService.deleteProduct(id, id_prod);
+  res.status(202).json({ status: "Delete", data: deleteOneProduct });
+};
+
 module.exports = {
   getAllCarrito,
   getCarritoById,
   createNewCarrito,
   updateCarrito,
   deleteCarrito,
+  createOneProduct,
+  deleteProduct,
 };

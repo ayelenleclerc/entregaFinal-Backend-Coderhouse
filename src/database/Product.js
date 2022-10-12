@@ -5,13 +5,13 @@ const getAllProducts = () => {
   return DB.products;
 };
 
-const getProductById = (productId) => {
-  const product = DB.products.find((product) => product.id === productId);
+const getProductById = (id) => {
+  const product = DB.products.find((product) => product.id === id);
 
   if (!product) {
     throw {
       status: 400,
-      message: `EL producto con el id:${productId} no existe`,
+      message: `EL producto con el id:${id} no existe`,
     };
   }
 
@@ -35,10 +35,8 @@ const createNewProduct = (newProduct) => {
     throw { status: 500, message: error?.message || error };
   }
 };
-const updateProduct = (productId, changes) => {
-  const indexForUpdate = DB.products.findIndex(
-    (product) => product.id === productId
-  );
+const updateProduct = (id, changes) => {
+  const indexForUpdate = DB.products.findIndex((product) => product.id === id);
 
   if (indexForUpdate === -1) {
     return;
@@ -53,10 +51,8 @@ const updateProduct = (productId, changes) => {
   return updatedProduct;
 };
 
-const deleteProduct = (productId) => {
-  const indexForDelete = DB.products.findIndex(
-    (product) => product.id === productId
-  );
+const deleteProduct = (id) => {
+  const indexForDelete = DB.products.findIndex((product) => product.id === id);
 
   if (indexForDelete === -1) {
     return;

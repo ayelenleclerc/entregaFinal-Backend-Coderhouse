@@ -4,8 +4,8 @@ const getAllCarrito = () => {
   const allCarritos = Carrito.getAllCarrito();
   return allCarritos;
 };
-const getCarritoById = (CarritoId) => {
-  const Carrito = Carrito.getCarritoById(CarritoId);
+const getCarritoById = (id) => {
+  const Carrito = Carrito.getCarritoById(id);
   return Carrito;
 };
 const createNewCarrito = (newCarrito) => {
@@ -13,12 +13,22 @@ const createNewCarrito = (newCarrito) => {
   return createdCarrito;
 };
 
-const updateCarrito = (CarritoId, changes) => {
-  const updateCarrito = Carrito.updateCarrito(CarritoId, changes);
+const updateCarrito = (id, changes) => {
+  const updateCarrito = Carrito.updateCarrito(id, changes);
   return updateCarrito;
 };
-const deleteCarrito = (CarritoId) => {
-  Carrito.deleteCarrito(CarritoId);
+const deleteCarrito = (id) => {
+  Carrito.deleteCarrito(id);
+  return;
+};
+
+const createProduct = (id, newProduct) => {
+  const newProduct = Carrito.createProduct(id, newProduct);
+  return newProduct;
+};
+
+const deleteProduct = (id, id_prod) => {
+  Carrito.deleteProduct(id, id_prod);
   return;
 };
 
@@ -28,4 +38,6 @@ module.exports = {
   createNewCarrito,
   updateCarrito,
   deleteCarrito,
+  createProduct,
+  deleteProduct,
 };
