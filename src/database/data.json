@@ -1,42 +1,45 @@
-[
-  {
-    "id": "1",
-    "timestamp": 1665333789460,
-    "name": "Marroc",
-    "description": "El Bombón Marroc de Felfort es una manera distinta de disfrutar el bocadito de chocolate y praliné más rico de todos. Disfrutá del Marroc en una presentación perfecta para utilizar en recetas de todo tipo o incluso para agregar a helados de manera directa.",
-    "code": "0001",
-    "img": "https://res.cloudinary.com/ayelenleclerc/image/upload/v1657515919/Suarez/Productos/felfort/felfort_marroc_ss5pqn.jpg",
-    "price": 1000,
-    "stock": 60
-  },
-  {
-    "id": "2",
-    "timestamp": 1665333842650,
-    "name": "Kooky Bon",
-    "description": "Bocadito relleno con una tentadora crema de Marroc y bañado con chocolate con leche Felfort.",
-    "code": "0002",
-    "img": "https://res.cloudinary.com/ayelenleclerc/image/upload/v1657515918/Suarez/Productos/felfort/felfort_kooky_bon_xgra7l.jpg",
-    "price": 950,
-    "stock": 50
-  },
-  {
-    "id": "3",
-    "timestamp": 1665333868483,
-    "name": "Cericet",
-    "description": "El mas fino licor recubierto de una capa de azúcar y bañado con el más rico chocolate semiamargo Felfort. Un compañero ideal para tus tardes de invierno y tus noches de películas. Probà el exquisito chocolate semiamargo con relleno del mejor licor y una cereza en su interior.",
-    "code": "0003",
-    "img": "https://res.cloudinary.com/ayelenleclerc/image/upload/v1657515918/Suarez/Productos/felfort/felfort_cericet_khddgt.jpg",
-    "price": 1550,
-    "stock": 30
-  },
-  {
-    "id": "4",
-    "timestamp": 1665333879507,
-    "name": "Dos corazones",
-    "description": "Dos corazones es un exquisito bocadito relleno bañado con el más rico chocolate con leche Felfort. Es ideal para compartir de a dos y disfrutar sus más románticas poesías autoadhesivas coleccionables",
-    "code": "0004",
-    "img": "https://res.cloudinary.com/ayelenleclerc/image/upload/v1657515918/Suarez/Productos/felfort/felfort_dos_corazones_tlp3ne.jpg",
-    "price": 1200,
-    "stock": 40
-  }
-]
+{
+  "products": [
+    {
+      "id": "1",
+      "timestamp": 1665333789460,
+      "name": "Marroc",
+      "description": "El Bombón Marroc de Felfort es una manera distinta de disfrutar el bocadito de chocolate y praliné más rico de todos. Disfrutá del Marroc en una presentación perfecta para utilizar en recetas de todo tipo o incluso para agregar a helados de manera directa.",
+      "code": "0001",
+      "img": "https://res.cloudinary.com/ayelenleclerc/image/upload/v1657515919/Suarez/Productos/felfort/felfort_marroc_ss5pqn.jpg",
+      "price": 1000,
+      "stock": 60
+    },
+    {
+      "id": "2",
+      "timestamp": 1665333842650,
+      "name": "Kooky Bon",
+      "description": "Bocadito relleno con una tentadora crema de Marroc y bañado con chocolate con leche Felfort.",
+      "code": "0002",
+      "img": "https://res.cloudinary.com/ayelenleclerc/image/upload/v1657515918/Suarez/Productos/felfort/felfort_kooky_bon_xgra7l.jpg",
+      "price": 950,
+      "stock": 50
+    },
+    {
+      "id": "3",
+      "timestamp": 1665333868483,
+      "name": "Cericet",
+      "description": "El mas fino licor recubierto de una capa de azúcar y bañado con el más rico chocolate semiamargo Felfort. Un compañero ideal para tus tardes de invierno y tus noches de películas. Probà el exquisito chocolate semiamargo con relleno del mejor licor y una cereza en su interior.",
+      "code": "0003",
+      "img": "https://res.cloudinary.com/ayelenleclerc/image/upload/v1657515918/Suarez/Productos/felfort/felfort_cericet_khddgt.jpg",
+      "price": 1550,
+      "stock": 30
+    },
+    {
+      "id": "4",
+      "timestamp": 1665333879507,
+      "name": "Dos corazones",
+      "description": "Dos corazones es un exquisito bocadito relleno bañado con el más rico chocolate con leche Felfort. Es ideal para compartir de a dos y disfrutar sus más románticas poesías autoadhesivas coleccionables",
+      "code": "0004",
+      "img": "https://res.cloudinary.com/ayelenleclerc/image/upload/v1657515918/Suarez/Productos/felfort/felfort_dos_corazones_tlp3ne.jpg",
+      "price": 1200,
+      "stock": 40
+    }
+  ],
+  "carrito": []
+}
