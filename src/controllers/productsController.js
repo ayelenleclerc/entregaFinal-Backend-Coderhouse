@@ -1,34 +1,79 @@
+const { v4: uuid } = require("uuid");
 const productService = require("../services/productService.js");
 
 const getAllProducts = (req, res) => {
-  const getAllProducts = productService.getAllProducts();
-  res.send({ status: "OK", data: getAllProducts });
+  const allProducts = productService.getAllProducts();
+  res.send({ status: "OK", data: allProducts });
 };
 
 const getProductById = (req, res) => {
-  const getProductById = productService.getProductById(req.params.productId);
-  res.send(`get products ${req.params.productId}`);
+  const {
+    params: { productId },
+  } = req;
+  if (!productId) {
+    return;
+  }
+
+  const product = productService.getProductById(productId);
+  res.send({ status: "OK", data: product });
 };
 
-const createProduct = (req, res) => {
-  const createdProduct = productService.createNewProduct(req.params.productId);
-  res.send(`create product ${req.params.productId}`);
+const createNewProduct = (req, res) => {
+  const { body } = req;
+  if (
+    !body.name ||
+    !body.description ||
+    !body.code ||
+    !body.img ||
+    !body.price ||
+    !body.stock
+  ) {
+    return;
+  }
+
+  const newProduct = {
+    id: uuid(),
+    timestamp: Date.now(),
+    name: body.name,
+    description: body.description,
+    code: body.code,
+    img: body.img,
+    price: body.price,
+    stock: body.stock,
+  };
+  const createdProduct = productService.createNewProduct(newProduct);
+  res.status(201).send({ status: "ok", data: createdProduct });
 };
 
 const updateProduct = (req, res) => {
-  const updateProduct = productService.updateProduct(req.params.productId);
-  res.send(`update product ${req.params.productId}`, updateProduct);
+  const {
+    body,
+    params: { productId },
+  } = req;
+
+  if (!productId) {
+    return;
+  }
+  const updateProduct = productService.updateProduct(productId, body);
+  res.send({ status: "ok", data: updateProduct });
 };
 
 const deleteProduct = (req, res) => {
-  const deleteProduct = productService.deleteProduct(req.params.productId);
-  res.send(`producto eliminado`);
+  const {
+    params: { productId },
+  } = req;
+
+  if (!productId) {
+    return;
+  }
+  productService.deleteProduct(productId);
+  res.status(204).send({ statis: "ok" });
 };
 
 module.exports = {
   getAllProducts,
   getProductById,
-  createProduct,
+  createNewProduct,
   updateProduct,
   deleteProduct,
 };

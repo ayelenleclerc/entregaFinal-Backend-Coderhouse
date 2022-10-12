@@ -1,19 +1,24 @@
-const Products = require("../database/Product.js");
+const Product = require("../database/Product.js");
 
 const getAllProducts = () => {
-  const allProducts = Products.getAllProducts();
+  const allProducts = Product.getAllProducts();
   return allProducts;
 };
-const getProductById = () => {
-  return;
+const getProductById = (productId) => {
+  const product = Product.getProductById(productId);
+  return product;
 };
-const createNewProduct = () => {
-  return;
+const createNewProduct = (newProduct) => {
+  const createdProduct = Product.createNewProduct(newProduct);
+  return createdProduct;
 };
-const updateProduct = () => {
-  return;
+
+const updateProduct = (productId, changes) => {
+  const updateProduct = Product.updateProduct(productId, changes);
+  return updateProduct;
 };
-const deleteProduct = () => {
+const deleteProduct = (productId) => {
+  Product.deleteProduct(productId);
   return;
 };
 
