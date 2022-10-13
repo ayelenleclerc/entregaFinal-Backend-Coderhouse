@@ -100,27 +100,11 @@ const deleteCarrito = (req, res) => {
   }
 };
 
-const createOneProduct = (req, res) => {
-  const { id } = req.params;
-  const { name, description, img, price, stock } = req.body;
+const addProduct = (req, res) => {
+  const { id, id_prod } = req.params;
+  const { product } = req.body;
 
-  if (!name || !description || !img || !price || (!stock && !id)) {
-    res
-      .status(204)
-      .json({ status: "False", result: "Formato ingresado incompleto." });
-    return;
-  }
-  const newProduct = {
-    timestamp: new Date().toUTCString(),
-    name,
-    description,
-    code,
-    img,
-    price,
-    stock,
-  };
-
-  const product = carritoService.createProduct(id, newProduct);
+  const productCart = carritoService.addProduct(id_prod, id, productCart);
   res.status(201).json({ status: "OK", data: product });
 };
 
@@ -141,6 +125,6 @@ module.exports = {
   createNewCarrito,
   updateCarrito,
   deleteCarrito,
-  createOneProduct,
+  addProduct,
   deleteProduct,
 };

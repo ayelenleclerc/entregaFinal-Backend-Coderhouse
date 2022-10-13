@@ -13,18 +13,14 @@ const createNewCarrito = (newCarrito) => {
   return createdCarrito;
 };
 
-const updateCarrito = (id, changes) => {
-  const updateCarrito = Carrito.updateCarrito(id, changes);
-  return updateCarrito;
-};
 const deleteCarrito = (id) => {
   Carrito.deleteCarrito(id);
   return;
 };
 
-const createProduct = (id, newProduct) => {
-  const newProduct = Carrito.createProduct(id, newProduct);
-  return newProduct;
+const addProduct = (id_prod, id, productCart) => {
+  const newProductCart = Carrito.addProduct(id_prod, id, productCart);
+  return newProductCart;
 };
 
 const deleteProduct = (id, id_prod) => {
@@ -38,6 +34,6 @@ module.exports = {
   createNewCarrito,
   updateCarrito,
   deleteCarrito,
-  createProduct,
+  addProduct,
   deleteProduct,
 };
