@@ -52,7 +52,7 @@ const deleteCarrito = (id) => {
   DB.carrito.splice(indexForDelete, 1);
   saveDb(DB);
 };
-const addProduct = (id_prod, id, productCart) => {
+const addProduct = (id_prod, id) => {
   const indexForAdd = DB.carrito.findIndex((carrito) => carrito.id === id);
   const productCart = DB.products.find((product) => product.id === id_prod);
 
