@@ -1,13 +1,14 @@
-const firebaseConfig = require("./firebase/firebase.config.json");
+const { DB_PASSWORD, FIREBASE_CREDENTIALS } = require("../config");
+
 module.exports = {
   files: {
-    users: "./data/users.json",
     products: "./data/products.json",
+    cart: "./data/cart.json",
   },
   mongodb: {
-    uri: "mongodb+srv://Ayelenleclerc:Yuskia13@backend.xrrgkdz.mongodb.net/?retryWrites=true&w=majority",
+    uri: `mongodb+srv://Ayelenleclerc:${DB_PASSWORD}@backend.xrrgkdz.mongodb.net/ecommerce?retryWrites=true&w=majority`,
   },
   firebase: {
-    credentials: firebaseConfig,
+    credentials: `${FIREBASE_CREDENTIALS}`,
   },
 };
