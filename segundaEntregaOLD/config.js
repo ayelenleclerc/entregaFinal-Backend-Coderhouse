@@ -1,4 +1,5 @@
 const envs = require("./.env");
+
 module.exports = {
   DB_PASSWORD: process.env.DB_PASSWORD,
   DATASOURCE: process.env.DATASOURCE,
