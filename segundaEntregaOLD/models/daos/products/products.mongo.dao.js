@@ -3,15 +3,14 @@ const MongoContainer = require("../../containers/mongo.container");
 
 const collection = "products";
 const productsSchema = new Schema({
-  _id: { type: Schema.Types.ObjectId },
-  timestamp: { type: "timestamp" },
-  name: { type: "string" },
-  description: { type: "string" },
-  code: { type: "Number", unique: true },
+  timestamp: { type: "Date" },
+  title: { type: "String" },
+  description: { type: "String" },
+  code: { type: "Number" },
   img: { type: "string" },
   price: { type: "Number" },
   stock: { type: "Number" },
-})();
+});
 class ProductsMongoDao extends MongoContainer {
   constructor() {
     super(collection, productsSchema);

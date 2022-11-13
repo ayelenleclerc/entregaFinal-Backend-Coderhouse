@@ -3,10 +3,9 @@ const MongoContainer = require("../../containers/mongo.container");
 
 const collection = "carts";
 const cartSchema = new Schema({
-  _id: { type: Schema.Types.ObjectId },
-  timestamp: { type: "timestamp" },
-  products: [{ type: "string" }],
-})();
+  timestamp: { type: "Date" },
+  products: [{ type: "String" }],
+});
 class CartMongoDao extends MongoContainer {
   constructor() {
     super(collection, cartSchema);
@@ -16,7 +15,7 @@ class CartMongoDao extends MongoContainer {
       { _id: cartId },
       {
         $push: {
-          products: [productId],
+          products: [{ productId }],
         },
       }
     );

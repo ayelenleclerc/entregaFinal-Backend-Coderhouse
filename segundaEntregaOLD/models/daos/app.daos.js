@@ -1,8 +1,9 @@
-const dataSource = process.env.DATASOURCE;
+const { DATASOURCE } = require("../../.env");
+
 let ProductsDao;
 let CartDao;
-switch (dataSource) {
-  case "mongo":
+switch (DATASOURCE) {
+  case "mongodb":
     ProductsDao = require("../daos/products/products.mongo.dao");
     CartDao = require("../daos/carts/cart.mongo.dao");
     break;
