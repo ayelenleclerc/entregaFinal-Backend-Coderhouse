@@ -1,81 +1,89 @@
-const { promises: fs } = require("fs");
+const fs = require("fs");
 
 class FileContainer {
-  constructor(ruta) {
-    this.ruta = ruta;
+  constructor(fileName) {
+    this.fileName = fileName;
+  }
+
+  async getById(id) {
+    try {
+      let products = await this.getAll();
+
+      let prodById = products.find((product) => product.id == id);
+      prodById == undefined ? (prodById = null) : prodById;
+      return prodById;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async getAll() {
     try {
-      const objs = await fs.readFile(this.ruta, "utf-8");
-      return JSON.parse(objs);
+      let fileToRead = await fs.promises.readFile(
+        `./${this.fileName}`,
+        "utf-8"
+      );
+      let products = JSON.parse(fileToRead);
+      return products;
     } catch (error) {
-      return [];
+      console.log(error);
     }
   }
 
-  async getById(id) {
-    const objs = await this.getAll();
-    const buscado = objs.find((o) => o.id == id);
-    return buscado;
-  }
-
-  async save(obj) {
-    const objs = await this.getAll();
-
-    let newId;
-    if (objs.length == 0) {
-      newId = 1;
-    } else {
-      newId = objs[objs.length - 1].id + 1;
-    }
-
-    const newObj = { ...obj, id: newId };
-    objs.push(newObj);
-
+  async delete(id) {
     try {
-      await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2));
-      return newId;
+      let products = await this.getAll();
+
+      let prodById = products.filter((product) => product.id !== +id);
+
+      await fs.promises.writeFile(
+        `./${this.fileName}`,
+        JSON.stringify(prodById)
+      );
+      return prodById;
     } catch (error) {
-      throw new Error(`Error al guardar: ${error}`);
-    }
-  }
-
-  async update(elem, id) {
-    const objs = await this.getAll();
-    const index = objs.findIndex((o) => o.id == id);
-    if (index == -1) {
-      throw new Error(`Error al actualizar: no se encontró el id ${id}`);
-    } else {
-      objs[index] = elem;
-      try {
-        await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2));
-      } catch (error) {
-        throw new Error(`Error al borrar: ${error}`);
-      }
-    }
-  }
-
-  async deleteById(id) {
-    const objs = await this.getAll();
-    const index = objs.findIndex((o) => o.id == id);
-    if (index == -1) {
-      throw new Error(`Error al borrar: no se encontró el id ${id}`);
-    }
-
-    objs.splice(index, 1);
-    try {
-      await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2));
-    } catch (error) {
-      throw new Error(`Error al borrar: ${error}`);
+      console.log(error);
     }
   }
 
   async deleteAll() {
     try {
-      await fs.writeFile(this.ruta, JSON.stringify([], null, 2));
+      let products = [];
+      await fs.promises.writeFile(
+        `./${this.fileName}`,
+        JSON.stringify(products)
+      );
     } catch (error) {
-      throw new Error(`Error al borrar todo: ${error}`);
+      console.log(error);
+    }
+  }
+
+  async update(productId, item) {
+    const { name, description, price, code, stock, image } = item;
+    const productsList = await this.getAll();
+    const productIndex = productsList.findIndex(
+      (product) => product.id === +productId
+    );
+    const updatedProduct = {
+      id: null,
+      timestamp: Date.now(),
+      name,
+      description,
+      price: +price,
+      code: +code,
+      stock: +stock,
+      image,
+    };
+
+    try {
+      let products = await this.getAll();
+      products[productIndex] = updatedProduct;
+      await fs.promises.writeFile(
+        `./${this.fileName}`,
+        JSON.stringify(products)
+      );
+    } catch (error) {
+      console.log(error);
     }
   }
 }

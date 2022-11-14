@@ -17,9 +17,9 @@ class FirebaseContainer {
     console.log("Firebase Connected!");
   }
 
-  async getAll(filter = {}) {
+  async getAll() {
     const docRef = await this.query.get();
-    const documents = docRef.docChanges;
+    const documents = docRef.docs;
     return documents.map((document) => {
       return {
         id: document.id,
@@ -29,7 +29,7 @@ class FirebaseContainer {
   }
 
   async getById(id) {
-    const docRef = this.query.get(id);
+    const docRef = this.query.doc(id);
     if (!docRef) {
       const message = `Resource with id ${id} does not exist in our records`;
       throw new HttpError(HTTP_STATUS.NOT_FOUND, message);
