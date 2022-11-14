@@ -1,8 +1,8 @@
-const HTTP_STATUS = require("../constants/api.constants");
+const HTTP_STATUS = require("../constants/api.constant");
 const { successResponse } = require("../utils/api.utils");
-const { CartDao } = require("../models/daos/app.daos");
+const { CartDao, ProductsDao } = require("../models/daos/app.dao");
 
-const cartDao = new CartDao();
+let cartDao = new CartDao();
 class CartController {
   async getCarts(req, res, next) {
     try {
@@ -56,12 +56,32 @@ class CartController {
       next(error);
     }
   }
-
-  async addToCart(req, res, next) {
-    const products = await cartDao.addProductCart(id);
+  async addProductToCart(req, res, next) {
+    const { cartId, productId } = req.params;
+    try {
+      const addProductToCart = await cartDao.addProductToCart(
+        cartId,
+        productId
+      );
+      const response = successResponse(addProductToCart);
+      res.status(HTTP_STATUS.OK).json(response);
+    } catch (error) {
+      next(error);
+    }
   }
-
-  async deleteToCart(req, res, next) {}
+  async removeProductFromCart(req, res, next) {
+    const { cartId, productId } = req.params;
+    try {
+      const removeProductFromCart = await cartDao.removeProductFromCart(
+        cartId,
+        productId
+      );
+      const response = successResponse(removeProductFromCart);
+      res.status(HTTP_STATUS.OK).json(response);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = new CartController();

@@ -1,8 +1,8 @@
-const HTTP_STATUS = require("../constants/api.constants");
+const HTTP_STATUS = require("../constants/api.constant");
 const { successResponse } = require("../utils/api.utils");
-const { ProductsDao } = require("../models/daos/app.daos");
+const { ProductsDao } = require("../models/daos/app.dao");
 
-const productsDao = new ProductsDao();
+let productsDao = new ProductsDao();
 class ProductsController {
   async getProducts(req, res, next) {
     try {

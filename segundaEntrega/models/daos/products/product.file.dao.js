@@ -2,9 +2,9 @@ const FileContainer = require("../../containers/file.container");
 
 class ProductsFileDao extends FileContainer {
   constructor() {
-    super(ruta);
-    this.ruta = "../../../DB/data/products.json";
+    super("../../../DB/data/products.json");
   }
+  async disconnet();
 }
 
 module.exports = ProductsFileDao;

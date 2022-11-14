@@ -3,23 +3,37 @@ const MongoContainer = require("../../containers/mongo.container");
 
 const collection = "carts";
 const cartSchema = new Schema({
-  timestamp: { type: "Date" },
-  products: [{ type: "String" }],
+  id: { type: Schema.Types.ObjectId },
+  timestamp: { type: Date, default: Date.now },
+  products: [{ type: String }],
 });
 class CartMongoDao extends MongoContainer {
   constructor() {
     super(collection, cartSchema);
   }
-  async addToCart(cartId, productId) {
-    this.model.updateOne(
-      { _id: cartId },
-      {
+  async addProductToCart(cartId, productId) {
+    try {
+      const updatedProductsToCart = await this.model.findByIdAndUpdate(cartId, {
         $push: {
-          products: [{ productId }],
+          products: [productId],
         },
-      }
-    );
+      });
+      return updatedProductsToCart;
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+  async removeProductFromCart(cartId, productId) {
+    try {
+      const updatedProductsToCart = await this.model.findByIdAndUpdate(cartId, {
+        $pull: {
+          products: [productId],
+        },
+      });
+      return updatedProductsToCart;
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 }
-
 module.exports = CartMongoDao;

@@ -1,5 +1,5 @@
 const { v4: uuid } = require("uuid");
-const { HTTP_STATUS } = require("../../constants/api.constants");
+const { HTTP_STATUS } = require("../../constants/api.constant");
 const { HttpError } = require("../../utils/api.utils");
 
 class MemoryContainer {

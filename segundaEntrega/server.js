@@ -1,6 +1,6 @@
 const app = require("./app");
 const { DATASOURCE } = require("./config");
-
+console.log(DATASOURCE);
 const PORT = process.env.PORT || 8080;
 
 const DATASOURSE_BY_ENV = {

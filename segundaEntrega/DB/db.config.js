@@ -1,14 +1,14 @@
-const { DB_PASSWORD, FIREBASE_CREDENTIALS } = require("../config");
+const envConfig = require("../config");
 
 module.exports = {
   files: {
     products: "./data/products.json",
     cart: "./data/cart.json",
   },
-  mongodb: {
-    uri: `mongodb+srv://Ayelenleclerc:${DB_PASSWORD}@backend.xrrgkdz.mongodb.net/ecommerce?retryWrites=true&w=majority`,
+  mongo: {
+    uri: `mongodb+srv://Ayelenleclerc:${envConfig.DB_PASSWORD}@backend.xrrgkdz.mongodb.net/ecommerce?retryWrites=true&w=majority`,
   },
   firebase: {
-    credentials: `${FIREBASE_CREDENTIALS}`,
+    credentials: `${envConfig.FIREBASE_CREDENTIALS}`,
   },
 };
